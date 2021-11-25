@@ -34,7 +34,10 @@ config_integration.trace_integrations(['requests'])
 logger = logging.getLogger(__name__)
 handler = AzureLogHandler(connection_string='InstrumentationKey=88ce3fe5-d145-4552-ab6b-c07428ddf38c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/')
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
+logger.setLevel(INFO)
 logger.addHandler(handler)
+eventHandler = AzureEventHandler(connection_string='InstrumentationKey=88ce3fe5-d145-4552-ab6b-c07428ddf38c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/')
+logger.addHandler(eventHandler)
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
